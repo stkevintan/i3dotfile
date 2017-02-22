@@ -1,3 +1,15 @@
 wifi:
   - nmcli
+temperature:
+  - sensors
+i3:
+  - i3blocks
+  - compton
+  - dmenu
+  - i3-dmenu-desktop
+  - quickswitch.py
+  - rofi
+  - xfce4-appfinder
+  - nitrogen
+  
 find WM: xprop|grep WM_CLASS
