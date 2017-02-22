@@ -1,0 +1,268 @@
+
+## init ##
+
+# variables
+set $mod 		 Mod4
+
+set $bg-color 	         #121417
+set $inactive-bg-color   #121417
+set $text-color          #97A09C
+set $inactive-text-color #60867f
+set $urgent-bg-color     #A4886C
+set $FOCUS #deded6
+set $UNFOCUS #2b3135
+
+set $FOUNT Titillium Web
+
+# aesthetics
+font pango:$FOUNT,FontAwesome 11
+for_window [class="^.*"] border pixel 0
+gaps inner 6
+gaps outer 0
+hide_edge_borders both
+smart_gaps on
+
+# Layout colors 	       bord     bg       text     indicator (split)
+client.focused 		    	 $FOCUS   $FOCUS   $FOCUS   $FOCUS
+client.focused_inactive  $UNFOCUS $UNFOCUS $UNFOCUS $UNFOCUS
+client.unfocused 	       $UNFOCUS $UNFOCUS $UNFOCUS $UNFOCUS
+client.urgent 		    	 $FOCUS   $FOCUS   $FOCUS   $FOCUS
+client.background 	     $UNFOCUS
+
+## workspaces ##
+set $ws1 	   "1: Browser"
+set $ws2     "2: Code"
+set $ws3 		 "3: Chat"
+set $ws4 		 "4: File"
+set $ws5 		 "5: Terminal"
+set $ws6 		 "6: Video"
+set $ws7 	   "7: Music"
+set $ws8  	 "8:  Graphic"
+set $ws9 		 "9: Game"
+#set $ws9 		 "9: Experiment"
+set $ws0 		 "0: Fullscreen"
+
+# bind apps to workspaces
+assign 	[class="google-chrome"] 			$ws1
+assign 	[class="vivaldi"] 						$ws1
+assign 	[class="firefox"] 						$ws1
+
+assign  [class="(?i)code"]  $ws2
+
+assign 	[class="Telegram"] 						$ws3
+assign  [class="wechat"]      				$ws3
+
+assign  [class="Nemo"]                $ws4
+assign  [class="File-roller"]         $ws4
+assign  [class="dde-file-manager"]    $ws4
+
+assign  [class="deepin-terminal"] 		$ws5
+
+assign 	[class="deepin-movie"] 				$ws6
+
+assign	[class="netease-cloud-music"] $ws7
+assign 	[class="Deadbeef"]						$ws7
+assign  [class="deepin-music"]        $ws7
+
+assign  [class="love-wallpaper"]      $ws8
+assign  [class="lovewallpaperHD"]     $ws8
+
+assign	[class="Steam"]				        $ws9
+
+assign  [class="dota2"]         		  $ws0
+assign	[class="Minecraft 1.8.9"]		  $ws0
+
+
+for_window [class="Geany"] floating enable border normal
+for_window [class="GParted"] floating enable border normal
+for_window [class="Nitrogen"] floating enable border normal
+for_window [class="(?i)virtualbox"] floating enable border normal
+
+for_window [class="Firefox"] enable border pixel 1
+for_window [class="vivaldi"] enable border pixel 1
+for_window [class="Galculator"] floating enable border pixel 4
+for_window [class="File-roller"] floating enable border pixel 1
+for_window [class="KeeWeb"] floating enable border pixel 1
+for_window [class="Telegram"] floating enable border pixel 1
+for_window [class="appfinder"] floating enable border pixel 1
+for_window [class="dconf-editor"] floating enable border pixel 1
+for_window [class="Archive-manager"] floating enable border pixel 1
+for_window[class="(?i)lovewallpaperhd"]  floating enable border pixel 1
+for_window [class="deepin-terminal"] sticky enable
+
+
+# i3bar
+bar {
+	position	top
+	#status_command	i3status -c ~/.config/i3/i3status.conf
+	status_command i3blocks -c ~/.config/i3/i3blocks.conf
+  tray_output	 none
+	#tray_padding 1
+	separator_symbol "  "
+  strip_workspace_numbers yes
+	colors {
+		background  #121417
+		#statusline #deded6
+		#separator  #4c5356
+		focused_workspace #673AB7 #673AB7 #deded6
+		active_workspace #151515 #151515 #d7d0c7
+		inactive_workspace #2b3135 #2b3135 #deded6
+		urgent_workspace #cd546c #ef545f #eddcd3
+	}
+}	 
+# bind keys for i3blocks
+# bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+# bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+
+
+
+
+
+## hotkeys ##
+
+# app hotkeys
+bindsym $mod+d exec dmenu_run -l 5 -p Run: -fn "Titillium Web" -nb "$inactive-bg-color" -nf "$inactive-text-color" -sb "$inactive-text-color" -sf "$inactive-bg-color"
+bindsym $mod+shift+d exec i3-dmenu-desktop --dmenu='dmenu -l 5 -p Run: -fn "Titillium Web" -nb "$inactive-bg-color" -nf "$inactive-text-color" -sb "$inactive-text-color" -sf "$inactive-bg-color"'
+bindsym $mod+Tab exec quickswitch.py -d 'dmenu -l 5 -p Windows: -fn "Titillium Web" -nb "$inactive-bg-color" -nf "$inactive-text-color" -sb "$inactive-text-color" -sf "$inactive-bg-color"'
+
+
+bindsym $mod+Return exec i3-sensible-terminal
+
+bindsym $mod+Control+t exec /opt/telegram/Telegram
+bindsym $mod+Control+g exec google-chrome
+bindsym $mod+Control+v exec vivaldi
+bindsym $mod+Control+f exec nemo
+bindsym $mod+Control+c exec code
+
+
+
+
+# other hotkeys
+bindsym $mod+shift+x exec locker
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+ #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%- #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id amixer set Master 1+ toggle
+
+bindsym $mod+i exec --no-startup-id amixer set Master 5%+ #increase sound volume
+bindsym $mod+o exec --no-startup-id amixer set Master 5%- #decrease sound volume
+bindsym $mod+p exec --no-startup-id amixer set Master 1+ toggle
+## wm keybindings ##
+
+floating_modifier $mod
+bindsym $mod+r mode "resize"
+bindsym $mod+q kill
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# layout hotkeys
+bindsym $mod+g split h
+bindsym $mod+v split v
+bindsym $mod+f fullscreen toggle
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+
+# i3 system keys
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+
+# shift focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# workspace navigation
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws0
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws0
+
+
+set $Locker dde-lock && sleep 1
+
+set $mode_system  System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Pause mode "$mode_system"
+
+
+## resize mode #
+
+mode "resize" {
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+# Function keys
+bindsym F2 exec rofi -show run
+bindsym F3 exec xfce4-appfinder
+
+# wallpaper nitrogen
+exec --no-startup-id nitrogen --restore
+
+#exec --no-startup-id guake
+# Transparencia
+# exec --no-startup-id compton -cGb
+exec --no-startup-id compton --config  ~/.config/i3/compton.conf
+#exec --no-startup-id  xcompmgr -c -f -n 
+
+# Salva panlla
+#exec --no-startup-id xscreensaver -nosplash
+
+# Autobloqueo i3lock-fancy
+exec xautolock -time 10 -locker dde-lock
+
+# Teclado numerico
+exec --no-startup-id numlockx on
+
+# Icono de volumen
+#exec --no-startup-id volumeicon

@@ -1,0 +1,3 @@
+wifi:
+  - nmcli
+find WM: xprop|grep WM_CLASS

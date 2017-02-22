@@ -1,0 +1,57 @@
+#!/bin/bash
+# Copyright (C) 2014 Alexander Keller <github@nycroth.com>
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#------------------------------------------------------------------------
+
+#INTERFACE="${BLOCK_INSTANCE:-wlan0}"
+
+#------------------------------------------------------------------------
+
+# As per #36 -- It is transparent: e.g. if the machine has no battery or wireless
+# connection (think desktop), the corresponding block should not be displayed.
+#[[ ! -d /sys/class/net/${INTERFACE}/wireless ]] ||
+ #   [[ "$(cat /sys/class/net/$INTERFACE/operstate)" = 'down' ]] && exit
+
+#------------------------------------------------------------------------
+
+#QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')
+
+#------------------------------------------------------------------------
+
+#echo $QUALITY% # full text
+#echo $QUALITY% # short text
+
+WIFI=`nmcli dev wifi|awk 'NR>1&&/^\*/{printf("%s %s",$2,$7)}'`
+
+[[ "$WIFI" = "" ]] && exit
+
+FULL=`echo "$WIFI"|awk '{printf("%s [%s%]",$1,$2)}'`
+SHORT=`echo "$WIFI"|awk'{print $1}'`
+COLOR=`echo "$WIFI"|awk '{
+    if($2 >= 80){ 
+        print "#81C784"
+    }else if($2 >= 60) { 
+        print "#E6EE9C"
+    }else if($2 >= 40) {
+        print "#FFCC80"
+    }else{
+        print "#FF7043"
+    }
+}'`
+
+echo  "$FULL"
+echo  "$SHORT"
+echo "$COLOR"
