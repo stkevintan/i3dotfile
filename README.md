@@ -26,5 +26,5 @@ i3:
 
 ## Snapshots
 
-![desktop1](https://raw.githubusercontent.com/stkevintan/i3dotfile/master/snapshots/desktop1.png)  
-![desktop2](https://raw.githubusercontent.com/stkevintan/i3dotfile/master/snapshots/desktop2.png)
+![desktop1](https://ols1thqnl.qnssl.com/2017-02-22-202712_1920x1080_scrot.png)  
+![desktop2](https://ols1thqnl.qnssl.com/2017-02-22-202823_1920x1080_scrot.png)
