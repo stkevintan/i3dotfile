@@ -83,7 +83,7 @@ for_window [class="vivaldi"] enable border pixel 1
 for_window [class="Galculator"] floating enable border pixel 4
 for_window [class="File-roller"] floating enable border pixel 1
 for_window [class="KeeWeb"] floating enable border pixel 1
-for_window [class="Telegram"] floating enable border pixel 1
+#for_window [class="Telegram"] floating enable border pixel 1
 for_window [class="appfinder"] floating enable border pixel 1
 for_window [class="dconf-editor"] floating enable border pixel 1
 for_window [class="Archive-manager"] floating enable border pixel 1
@@ -133,7 +133,8 @@ bindsym $mod+Control+g exec google-chrome
 bindsym $mod+Control+v exec vivaldi
 bindsym $mod+Control+f exec nemo
 bindsym $mod+Control+c exec code
-
+bindsym $mod+Control+n exec nitrogen
+bindsym $mod+Control+w exec electronic-wechat
 
 
 
@@ -143,9 +144,11 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+ #increas
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%- #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id amixer set Master 1+ toggle
 
-bindsym $mod+i exec --no-startup-id amixer set Master 5%+ #increase sound volume
-bindsym $mod+o exec --no-startup-id amixer set Master 5%- #decrease sound volume
-bindsym $mod+p exec --no-startup-id amixer set Master 1+ toggle
+# bindsym $mod+i exec --no-startup-id amixer set Master 5%+ #increase sound volume
+# bindsym $mod+o exec --no-startup-id amixer set Master 5%- #decrease sound volume
+# bindsym $mod+p exec --no-startup-id amixer set Master 1+ toggle
+
+
 ## wm keybindings ##
 
 floating_modifier $mod
@@ -208,15 +211,15 @@ bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws0
 
 
-set $Locker dde-lock && sleep 1
+set $Locker dde-lock
 
 set $mode_system  System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
 
