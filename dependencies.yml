@@ -1,15 +1,28 @@
-wifi:
-  - nmcli
-temperature:
-  - sensors
+i3blocks:
+  wifi:
+    - nmcli(NetworkManager)
+  temperature:
+    - sensors
+  bluetooth:
+    - bluez
+  brightness:
+    - xorg-xbacklight
 i3:
   - i3blocks
   - compton
   - dmenu
-  - i3-dmenu-desktop
-  - quickswitch.py
+  - i3-quickswitch
   - rofi
   - xfce4-appfinder
   - nitrogen
-  
+
+DM:
+  - lightdm
+  - lightdm-gtk-greeter
+  - light-locker
+ 
+clipboard:
+  - clipit
+
+
 find WM: xprop|grep WM_CLASS

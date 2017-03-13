@@ -7,21 +7,33 @@ My i3 WM config files. including `compton`, `i3` and `i3blocks`.
 ```bash
 git clone https://github.com/stkevintan/i3dotfile  ~/.config/i3
 ```
-Dependencies(Part) :
+Basic Dependencies :
 ```yaml
-wifi:
-  - nmcli
-temperature:
-  - sensors
+i3blocks:
+  wifi:
+    - nmcli(NetworkManager)
+  temperature:
+    - sensors
+  bluetooth:
+    - bluez
+  brightness:
+    - xorg-xbacklight
 i3:
   - i3blocks
   - compton
   - dmenu
-  - i3-dmenu-desktop
-  - quickswitch.py
+  - i3-quickswitch
   - rofi
   - xfce4-appfinder
   - nitrogen
+
+DM:
+  - lightdm
+  - lightdm-gtk-greeter
+  - light-locker
+ 
+clipboard:
+  - clipit
 ```
 
 ## Snapshots

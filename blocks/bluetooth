@@ -14,7 +14,9 @@ fi
 STATUS=$(bluetooth | grep -wo 'on')
 
 if [[ "${STATUS}" = "on" ]]; then
-  echo "on"
-  echo "on"
-  echo ""
+  echo "On"
+  echo "On"
+else
+  echo "Off"
+  echo "Off"
 fi

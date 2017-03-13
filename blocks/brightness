@@ -4,11 +4,11 @@
 METHOD="xbacklight"
 
 # Left click
-if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
-  xbacklight -inc 5
+if [[ "${BLOCK_BUTTON}" -eq 4 ]]; then
+  xbacklight -inc 2
 # Right click
-elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
-  xbacklight -dec 5
+elif [[ "${BLOCK_BUTTON}" -eq 5 ]]; then
+  xbacklight -dec 2
 fi
 
 URGENT_VALUE=10

@@ -15,7 +15,7 @@ set $UNFOCUS #2b3135
 set $FOUNT Titillium Web
 
 # aesthetics
-font pango:$FOUNT,FontAwesome 11
+font pango:$FOUNT,FontAwesome 13
 for_window [class="^.*"] border pixel 0
 gaps inner 6
 gaps outer 0
@@ -43,7 +43,7 @@ set $ws9 		 "9: Game"
 set $ws0 		 "0: Fullscreen"
 
 # bind apps to workspaces
-assign 	[class="google-chrome"] 			$ws1
+assign 	[class="google-chrome-stable"] 			$ws1
 assign 	[class="vivaldi"] 						$ws1
 assign 	[class="firefox"] 						$ws1
 
@@ -77,26 +77,25 @@ for_window [class="Geany"] floating enable border normal
 for_window [class="GParted"] floating enable border normal
 for_window [class="Nitrogen"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
-
+for_window [class="Youdao Dict"] floating enable border normal
 for_window [class="Firefox"] enable border pixel 1
 for_window [class="vivaldi"] enable border pixel 1
 for_window [class="Galculator"] floating enable border pixel 4
 for_window [class="File-roller"] floating enable border pixel 1
 for_window [class="KeeWeb"] floating enable border pixel 1
-#for_window [class="Telegram"] floating enable border pixel 1
+for_window [class="Telegram"] floating enable border pixel 1
 for_window [class="appfinder"] floating enable border pixel 1
 for_window [class="dconf-editor"] floating enable border pixel 1
 for_window [class="Archive-manager"] floating enable border pixel 1
 for_window[class="(?i)lovewallpaperhd"]  floating enable border pixel 1
-for_window [class="deepin-terminal"] sticky enable
-
 
 # i3bar
 bar {
 	position	top
+  height 30
 	#status_command	i3status -c ~/.config/i3/i3status.conf
 	status_command i3blocks -c ~/.config/i3/i3blocks.conf
-  tray_output	 none
+  tray_output	 primary
 	#tray_padding 1
 	separator_symbol "  "
   strip_workspace_numbers yes
@@ -124,29 +123,27 @@ bar {
 bindsym $mod+d exec dmenu_run -l 5 -p Run: -fn "Titillium Web" -nb "$inactive-bg-color" -nf "$inactive-text-color" -sb "$inactive-text-color" -sf "$inactive-bg-color"
 bindsym $mod+shift+d exec i3-dmenu-desktop --dmenu='dmenu -l 5 -p Run: -fn "Titillium Web" -nb "$inactive-bg-color" -nf "$inactive-text-color" -sb "$inactive-text-color" -sf "$inactive-bg-color"'
 bindsym $mod+Tab exec quickswitch.py -d 'dmenu -l 5 -p Windows: -fn "Titillium Web" -nb "$inactive-bg-color" -nf "$inactive-text-color" -sb "$inactive-text-color" -sf "$inactive-bg-color"'
+bindsym F10 exec xfce4-appfinder
+bindsym Print exec xfce4-screenshooter
 
+# bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec pantheon-terminal
 
-bindsym $mod+Return exec i3-sensible-terminal
-
-bindsym $mod+Control+t exec /opt/telegram/Telegram
-bindsym $mod+Control+g exec google-chrome
+bindsym $mod+Control+t exec telegram-desktop
+bindsym $mod+Control+g exec google-chrome-stable
 bindsym $mod+Control+v exec vivaldi
 bindsym $mod+Control+f exec nemo
 bindsym $mod+Control+c exec code
 bindsym $mod+Control+n exec nitrogen
 bindsym $mod+Control+w exec electronic-wechat
+bindsym $mod+Control+y exec youdao-dict
 
 
 
 # other hotkeys
-bindsym $mod+shift+x exec locker
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+ #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%- #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id amixer set Master 1+ toggle
-
-# bindsym $mod+i exec --no-startup-id amixer set Master 5%+ #increase sound volume
-# bindsym $mod+o exec --no-startup-id amixer set Master 5%- #decrease sound volume
-# bindsym $mod+p exec --no-startup-id amixer set Master 1+ toggle
 
 
 ## wm keybindings ##
@@ -166,11 +163,11 @@ bindsym $mod+Shift+Right move right
 # layout hotkeys
 bindsym $mod+g split h
 bindsym $mod+v split v
-bindsym $mod+f fullscreen toggle
+bindsym F11 fullscreen toggle
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+f floating toggle
 bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
@@ -210,8 +207,12 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws0
 
+bindsym $mod+Control+Left move workspace to output left
+bindsym $mod+Control+Right move workspace to output right
+bindsym $mod+Control+Up move workspace to output up
+bindsym $mod+Control+Down move workspace to output down
 
-set $Locker dde-lock
+set $Locker light-locker
 
 set $mode_system  System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 
@@ -228,7 +229,7 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
-bindsym $mod+Pause mode "$mode_system"
+bindsym $mod+Insert mode "$mode_system"
 
 
 ## resize mode #
@@ -246,8 +247,7 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 # Function keys
-bindsym F2 exec rofi -show run
-bindsym F3 exec xfce4-appfinder
+# bindsym F10 exec rofi -show run
 
 # wallpaper nitrogen
 exec --no-startup-id nitrogen --restore
@@ -257,15 +257,21 @@ exec --no-startup-id nitrogen --restore
 # exec --no-startup-id compton -cGb
 exec --no-startup-id compton --config  ~/.config/i3/compton.conf
 #exec --no-startup-id  xcompmgr -c -f -n 
-
 # Salva panlla
 #exec --no-startup-id xscreensaver -nosplash
 
-# Autobloqueo i3lock-fancy
-exec xautolock -time 10 -locker dde-lock
+
+#exec --no-startup-id xautolock -time 10 -locker light-lock
+
+# fcitx
+exec --no-startup-id fcitx
+
+# clipboard
+exec --no-startup-id clipit
+
 
 # Teclado numerico
-exec --no-startup-id numlockx on
+# exec --no-startup-id numlockx on
 
 # Icono de volumen
 #exec --no-startup-id volumeicon
