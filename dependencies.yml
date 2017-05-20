@@ -7,6 +7,10 @@ i3blocks:
     - bluez
   brightness:
     - xorg-xbacklight
+  cpu_usage:
+    - sysstat
+  battery:
+    - acpi
 i3:
   - i3blocks
   - compton
@@ -15,6 +19,8 @@ i3:
   - rofi
   - xfce4-appfinder
   - nitrogen
+  - lxappearance-gtk3
+  - arandr
 
 DM:
   - lightdm

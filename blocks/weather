@@ -1,7 +1,7 @@
 #!/bin/bash
 # Based on http://openweathermap.org/current
 
-API_KEY="060398b0e3e19bcb220848e3c50ec5b9"
+API_KEY="5604f6d4ba8753c632e3f440bcbbc8fc"
 
 # Check on http://openweathermap.org/find
 CITY_ID="${BLOCK_INSTANCE}"

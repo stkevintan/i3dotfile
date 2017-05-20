@@ -5,10 +5,10 @@ METHOD="xbacklight"
 
 # Left click
 if [[ "${BLOCK_BUTTON}" -eq 4 ]]; then
-  xbacklight -inc 2
+  xbacklight -inc 10
 # Right click
 elif [[ "${BLOCK_BUTTON}" -eq 5 ]]; then
-  xbacklight -dec 2
+  xbacklight -dec 10
 fi
 
 URGENT_VALUE=10
@@ -26,6 +26,7 @@ elif [[ "${METHOD}" = "kernel" ]]; then
   device="${BLOCK_INSTANCE:-intel_backlight}"
   maxBrightness=$(cat /sys/class/backlight/${device}/max_brightness)
   curBrightness=$(cat /sys/class/backlight/${device}/brightness)
+  
 elif [[ "${METHOD}" = "xbacklight" ]]; then
   curBrightness=$(xbacklight -get)
 fi

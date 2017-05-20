@@ -95,8 +95,7 @@ bar {
   height 30
 	#status_command	i3status -c ~/.config/i3/i3status.conf
 	status_command i3blocks -c ~/.config/i3/i3blocks.conf
-  tray_output	 primary
-	#tray_padding 1
+  tray_output	primary
 	separator_symbol "  "
   strip_workspace_numbers yes
 	colors {
@@ -137,7 +136,7 @@ bindsym $mod+Control+c exec code
 bindsym $mod+Control+n exec nitrogen
 bindsym $mod+Control+w exec electronic-wechat
 bindsym $mod+Control+y exec youdao-dict
-
+bindsym $mod+Control+m exec netease-cloud-music
 
 
 # other hotkeys
@@ -145,6 +144,17 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+ #increas
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%- #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id amixer set Master 1+ toggle
 
+# Media player controls
+bindsym XF86AudioPlay exec --no-startup-id playerctl play
+bindsym XF86AudioPause exec --no-startup-id playerctl pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease screen brightness
+
+bindsym XF86Display exec --no-startup-id arandr
 
 ## wm keybindings ##
 
@@ -212,6 +222,11 @@ bindsym $mod+Control+Right move workspace to output right
 bindsym $mod+Control+Up move workspace to output up
 bindsym $mod+Control+Down move workspace to output down
 
+bindsym $mod+Control+h move workspace to output left
+bindsym $mod+Control+l move workspace to output right
+bindsym $mod+Control+j move workspace to output up
+bindsym $mod+Control+k move workspace to output down
+
 set $Locker light-locker
 
 set $mode_system  System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -263,13 +278,18 @@ exec --no-startup-id compton --config  ~/.config/i3/compton.conf
 
 #exec --no-startup-id xautolock -time 10 -locker light-lock
 
+#bluetooth
+
+exec --no-startup-id blueberry-tray
 # fcitx
 exec --no-startup-id fcitx
 
 # clipboard
 exec --no-startup-id clipit
 
+exec --no-startup-id sleep 3 && xfce4-power-manager
 
+exec --no-startup-id srunctl
 # Teclado numerico
 # exec --no-startup-id numlockx on
 
