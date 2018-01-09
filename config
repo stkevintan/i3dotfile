@@ -15,7 +15,7 @@ set $UNFOCUS #2b3135
 set $FOUNT Titillium Web
 
 # aesthetics
-font pango:$FOUNT,FontAwesome 13
+font pango:$FOUNT,Font Awesome, 13
 for_window [class="^.*"] border pixel 0
 gaps inner 6
 gaps outer 0
@@ -52,7 +52,7 @@ assign  [class="(?i)code"]  $ws2
 assign 	[class="Telegram"] 						$ws3
 assign  [class="wechat"]      				$ws3
 
-assign  [class="Nemo"]                $ws4
+assign  [class="(?i)Nautilus"]                $ws4
 assign  [class="File-roller"]         $ws4
 assign  [class="dde-file-manager"]    $ws4
 
@@ -87,19 +87,19 @@ for_window [class="Telegram"] floating enable border pixel 1
 for_window [class="appfinder"] floating enable border pixel 1
 for_window [class="dconf-editor"] floating enable border pixel 1
 for_window [class="Archive-manager"] floating enable border pixel 1
-for_window[class="(?i)lovewallpaperhd"]  floating enable border pixel 1
+for_window [class="(?i)lovewallpaperhd"]  floating enable border pixel 1
 
 # i3bar
 bar {
 	position	top
   height 30
-	#status_command	i3status -c ~/.config/i3/i3status.conf
-	status_command i3blocks -c ~/.config/i3/i3blocks.conf
-  tray_output	primary
+	# status_command	i3status -c ~/.config/sway/i3status.conf
+	status_command i3blocks -c ~/.config/sway/i3blocks.conf
+  tray_output	all
 	separator_symbol "  "
   strip_workspace_numbers yes
 	colors {
-		background  #121417
+		background  #12141799
 		#statusline #deded6
 		#separator  #4c5356
 		focused_workspace #673AB7 #673AB7 #deded6
@@ -123,15 +123,14 @@ bindsym $mod+d exec dmenu_run -l 5 -p Run: -fn "Titillium Web" -nb "$inactive-bg
 bindsym $mod+shift+d exec i3-dmenu-desktop --dmenu='dmenu -l 5 -p Run: -fn "Titillium Web" -nb "$inactive-bg-color" -nf "$inactive-text-color" -sb "$inactive-text-color" -sf "$inactive-bg-color"'
 bindsym $mod+Tab exec quickswitch.py -d 'dmenu -l 5 -p Windows: -fn "Titillium Web" -nb "$inactive-bg-color" -nf "$inactive-text-color" -sb "$inactive-text-color" -sf "$inactive-bg-color"'
 bindsym F10 exec xfce4-appfinder
-bindsym Print exec xfce4-screenshooter
+bindsym Print exec gnome-screenshot
 
 # bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec pantheon-terminal
 
 bindsym $mod+Control+t exec telegram-desktop
 bindsym $mod+Control+g exec google-chrome-stable
-bindsym $mod+Control+v exec vivaldi
-bindsym $mod+Control+f exec nemo
+bindsym $mod+Control+f exec nautilus
 bindsym $mod+Control+c exec code
 bindsym $mod+Control+n exec nitrogen
 bindsym $mod+Control+w exec electronic-wechat
@@ -151,10 +150,10 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen brightness
 
-bindsym XF86Display exec --no-startup-id arandr
+# bindsym XF86Display exec --no-startup-id arandr
 
 ## wm keybindings ##
 
@@ -227,13 +226,11 @@ bindsym $mod+Control+l move workspace to output right
 bindsym $mod+Control+j move workspace to output up
 bindsym $mod+Control+k move workspace to output down
 
-set $Locker light-locker
-
 set $mode_system  System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym l exec --no-startup-id swaylock, mode "default"
+    bindsym e exec --no-startup-id swaymsg exit, mode "default"
     bindsym s exec --no-startup-id systemctl suspend, mode "default"
     bindsym h exec --no-startup-id hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
@@ -265,12 +262,30 @@ mode "resize" {
 # bindsym F10 exec rofi -show run
 
 # wallpaper nitrogen
-exec --no-startup-id nitrogen --restore
+# exec --no-startup-id nitrogen --restore
+
+# Display monitors
+# using swaymsg -t get_outputs for monitors detail.
+
+workspace $ws1 output DP-1
+workspace $ws2 output eDP-1
+
+
+output "*" background "/home/kevin/wallpaper/bg1.jpg" stretch 
+
+# must be the last 
+output eDP-1 pos 1920,0
+output DP-1 pos 0,0
+
+# touchpad tap enable
+input 1739:30382:DLL0704:01_06CB:76AE_To tap enabled
+
+
 
 #exec --no-startup-id guake
 # Transparencia
 # exec --no-startup-id compton -cGb
-exec --no-startup-id compton --config  ~/.config/i3/compton.conf
+# exec --no-startup-id compton --config  ~/.config/sway/compton.conf
 #exec --no-startup-id  xcompmgr -c -f -n 
 # Salva panlla
 #exec --no-startup-id xscreensaver -nosplash
@@ -285,11 +300,11 @@ exec --no-startup-id blueberry-tray
 exec --no-startup-id fcitx
 
 # clipboard
-exec --no-startup-id clipit
+# exec --no-startup-id clipit
 
-exec --no-startup-id sleep 3 && xfce4-power-manager
+# exec --no-startup-id sleep 3 && xfce4-power-manager
 
-exec --no-startup-id srunctl
+# exec --no-startup-id srunctl
 # Teclado numerico
 # exec --no-startup-id numlockx on
 
