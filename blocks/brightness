@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # One of the following: xrandr, xbacklight, kernel
-METHOD="xbacklight"
+METHOD="light"
 
 # Left click
 if [[ "${BLOCK_BUTTON}" -eq 4 ]]; then
-  xbacklight -inc 10
+  light -A 5
 # Right click
 elif [[ "${BLOCK_BUTTON}" -eq 5 ]]; then
-  xbacklight -dec 10
+  light -U 5
 fi
 
 URGENT_VALUE=10
@@ -27,11 +27,11 @@ elif [[ "${METHOD}" = "kernel" ]]; then
   maxBrightness=$(cat /sys/class/backlight/${device}/max_brightness)
   curBrightness=$(cat /sys/class/backlight/${device}/brightness)
   
-elif [[ "${METHOD}" = "xbacklight" ]]; then
-  curBrightness=$(xbacklight -get)
+elif [[ "${METHOD}" = "light" ]]; then
+  curBrightness=$(light -G)
 fi
 
-if [[ "${curBrightness}" -le 0 ]]; then
+if [[ "${curBrightness}" -lt 0 ]]; then
   exit
 fi
 
@@ -39,13 +39,13 @@ if [[ "${METHOD}" = "xrandr" ]]; then
   percent=$(echo "scale=0;${curBrightness} * 100" | bc -l)
 elif [[ "${METHOD}" = "kernel" ]]; then
   percent=$(echo "scale=0;${curBrightness} / ${maxBrightness} * 100" | bc -l)
-elif [[ "${METHOD}" = "xbacklight" ]]; then
+elif [[ "${METHOD}" = "light" ]]; then
   percent=$(echo "scale=0;${curBrightness}" | bc -l)
 fi
 
 percent=${percent%.*}
 
-if [[ "${percent}" -le 0 ]]; then
+if [[ "${percent}" -lt 0 ]]; then
   exit
 fi
 

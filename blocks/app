@@ -1,19 +1,10 @@
 #! /bin/bash
-APP="${BLOCK_INSTANCE:-'wechat'}"
+
+APP="${BLOCK_INSTANCE}"
 if [ -z "$APP" ]; then
   exit
 fi
 
-CMD=""
-if [[ "$APP" = "wechat"  ]]; then
-  CMD=electronic-wechat
-  echo ""
-  echo ""
-elif [[ "$APP" = "telegram" ]]; then
-  CMD=/opt/telegram/Telegram
-  echo ""
-  echo ""
-fi
 if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
-    $CMD
+    $APP
 fi

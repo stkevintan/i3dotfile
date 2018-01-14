@@ -43,7 +43,7 @@ set $ws9 		 "9: Game"
 set $ws0 		 "0: Fullscreen"
 
 # bind apps to workspaces
-assign 	[class="google-chrome-stable"] 			$ws1
+assign 	[class="chrome-stable"] 			$ws1
 assign 	[class="vivaldi"] 						$ws1
 assign 	[class="firefox"] 						$ws1
 
@@ -64,30 +64,14 @@ assign	[class="netease-cloud-music"] $ws7
 assign 	[class="Deadbeef"]						$ws7
 assign  [class="deepin-music"]        $ws7
 
-assign  [class="love-wallpaper"]      $ws8
-assign  [class="lovewallpaperHD"]     $ws8
 
 assign	[class="Steam"]				        $ws9
 
 assign  [class="dota2"]         		  $ws0
-assign	[class="Minecraft 1.8.9"]		  $ws0
+assign	[class="Minecraft.*"]		  $ws0
 
 
-for_window [class="Geany"] floating enable border normal
-for_window [class="GParted"] floating enable border normal
-for_window [class="Nitrogen"] floating enable border normal
-for_window [class="(?i)virtualbox"] floating enable border normal
-for_window [class="Youdao Dict"] floating enable border normal
-for_window [class="Firefox"] enable border pixel 1
-for_window [class="vivaldi"] enable border pixel 1
-for_window [class="Galculator"] floating enable border pixel 4
-for_window [class="File-roller"] floating enable border pixel 1
-for_window [class="KeeWeb"] floating enable border pixel 1
-for_window [class="Telegram"] floating enable border pixel 1
-for_window [class="appfinder"] floating enable border pixel 1
-for_window [class="dconf-editor"] floating enable border pixel 1
-for_window [class="Archive-manager"] floating enable border pixel 1
-for_window[class="(?i)lovewallpaperhd"]  floating enable border pixel 1
+
 
 # i3bar
 bar {
@@ -115,46 +99,53 @@ bar {
 
 
 
+for_window [class="net-minecraft.*"] floating enable border pixel 1
+for_window [class="electronic-wechat"] floating enable border pixel 1
+for_window [class="Geany"] floating enable border normal
+for_window [class="GParted"] floating enable border normal
+for_window [class="Nitrogen"] floating enable border normal
+for_window [class="(?i)virtualbox"] floating enable border normal
+for_window [class="Youdao Dict"] floating enable border normal
+for_window [class="Firefox"] enable border pixel 1
+for_window [class="vivaldi"] enable border pixel 1
+for_window [class="Galculator"] floating enable border pixel 4
+for_window [class="File-roller"] floating enable border pixel 1
+for_window [class="KeeWeb"] floating enable border pixel 1
+for_window [class="Telegram"] floating enable border normal
+for_window [class="appfinder"] fullscreen enable
+for_window [class="dconf-editor"] floating enable border pixel 1
+for_window [class="netease-cloud-music"] floating enable sticky enable
+
+
+
 
 ## hotkeys ##
-
 # app hotkeys
 bindsym $mod+d exec dmenu_run -l 5 -p Run: -fn "Titillium Web" -nb "$inactive-bg-color" -nf "$inactive-text-color" -sb "$inactive-text-color" -sf "$inactive-bg-color"
 bindsym $mod+shift+d exec i3-dmenu-desktop --dmenu='dmenu -l 5 -p Run: -fn "Titillium Web" -nb "$inactive-bg-color" -nf "$inactive-text-color" -sb "$inactive-text-color" -sf "$inactive-bg-color"'
+bindsym $mod+c exec clipmenu  -fn "Titillium Web" -nb "$inactive-bg-color" -nf "$inactive-text-color" -sb "$inactive-text-color" -sf "$inactive-bg-color"
 bindsym $mod+Tab exec quickswitch.py -d 'dmenu -l 5 -p Windows: -fn "Titillium Web" -nb "$inactive-bg-color" -nf "$inactive-text-color" -sb "$inactive-text-color" -sf "$inactive-bg-color"'
-bindsym F10 exec xfce4-appfinder
-bindsym Print exec xfce4-screenshooter
 
-# bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec pantheon-terminal
+#super + `
+bindsym $mod+grave exec xfce4-appfinder
+bindsym Print exec deepin-screenshot
+bindsym Control+Mod1+a exec deepin-screenshot
+
+bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+Return [instance="pantheon-terminal"] scratchpad show
 
 bindsym $mod+Control+t exec telegram-desktop
 bindsym $mod+Control+g exec google-chrome-stable
-bindsym $mod+Control+v exec vivaldi
 bindsym $mod+Control+f exec nemo
 bindsym $mod+Control+c exec code
 bindsym $mod+Control+n exec nitrogen
 bindsym $mod+Control+w exec electronic-wechat
-bindsym $mod+Control+y exec youdao-dict
 bindsym $mod+Control+m exec netease-cloud-music
 
-
-# other hotkeys
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+ #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%- #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id amixer set Master 1+ toggle
-
-# Media player controls
-bindsym XF86AudioPlay exec --no-startup-id playerctl play
-bindsym XF86AudioPause exec --no-startup-id playerctl pause
-bindsym XF86AudioNext exec --no-startup-id playerctl next
-bindsym XF86AudioPrev exec --no-startup-id playerctl previous
-
-# Sreen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease screen brightness
-
-bindsym XF86Display exec --no-startup-id arandr
+# Make the currently focused window a scratchpad
+bindsym $mod+equal move scratchpad
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
 
 ## wm keybindings ##
 
@@ -174,12 +165,14 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+g split h
 bindsym $mod+v split v
 bindsym F11 fullscreen toggle
-bindsym $mod+s layout stacking
+# bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+# bindsym $mod+e focus mode_toggle
 bindsym $mod+f floating toggle
-bindsym $mod+space focus mode_toggle
-bindsym $mod+a focus parent
+bindsym $mod+space layout toggle split 
+# bindsym $mod+a focus parent
+# to all workspace
+bindsym $mod+a sticky toggle 
 
 # i3 system keys
 bindsym $mod+Shift+c reload
@@ -227,24 +220,49 @@ bindsym $mod+Control+l move workspace to output right
 bindsym $mod+Control+j move workspace to output up
 bindsym $mod+Control+k move workspace to output down
 
-set $Locker light-locker
 
-set $mode_system  System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+bindsym $mod+Delete mode "$mode_system"
+
+set $mode_system  System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (p) shutdown
 
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym l exec --no-startup-id light-locker-command -l, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
     bindsym s exec --no-startup-id systemctl suspend, mode "default"
     bindsym h exec --no-startup-id hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+    bindsym p exec --no-startup-id systemctl poweroff -i, mode "default"  
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+set $EDP eDP-1
+set $DP DP-1
+set $VGA VGA-1
+
+set $mode_display Ext Screen (v/V) VGA Left/Right, (d/D) DP Left/Right, (x) VGA OFF, (X) DP OFF, (a) Arandr
+mode "$mode_display" {
+    bindsym v exec --no-startup-id xrandr --output $VGA --auto --left-of $EDP, mode "default"
+    bindsym shift+v exec --no-startup-id xrandr --output $VGA --auto --right-of $EDP, mode "default"
+
+    bindsym d exec --no-startup-id xrandr --output $DP --auto --left-of $EDP, mode "default"
+    bindsym shift+D exec --no-startup-id xrandr --output $DP --auto --right-of $EDP, mode "default"
+
+    bindsym x exec --no-startup-id xrandr --output $VGA --auto --off, mode "default"
+    bindsym shift+x exec --no-startup-id xrandr --output $DP --auto --off, mode "default"
+
+    bindsym a exec --no-startup-id arandr
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 
-bindsym $mod+Insert mode "$mode_system"
+# Declare here the shortcut to bring the display selection menu
+# Super + P  === Fn+F8 in dell laptop keyboard
+bindsym $mod+p mode "$mode_display"
 
 
 ## resize mode #
@@ -261,11 +279,34 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-# Function keys
-# bindsym F10 exec rofi -show run
+
+
+# Media volume controls
+bindsym XF86AudioRaiseVolume exec amixer set Master 5%+ unmute && pkill -RTMIN+2 i3blocks
+bindsym XF86AudioLowerVolume exec amixer set Master 5%- unmute && pkill -RTMIN+2 i3blocks
+bindsym XF86AudioMute exec amixer -q set Master toggle && pkill -RTMIN+2 i3blocks
+
+# Media player controls
+bindsym XF86AudioPlay exec --no-startup-id playerctl play
+bindsym XF86AudioPause exec --no-startup-id playerctl pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10 && pkill -RTMIN+3 i3blocks
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10 && pkill -RTMIN+3 i3blocks
+
+
+exec --no-start-id sleep 3  && notify-send Hi~ "Have a nice day, `whoami`"!
+
+#display monitors generated by arandr
+exec --no-start-id ~/.screenlayout/multihead.sh    
 
 # wallpaper nitrogen
 exec --no-startup-id nitrogen --restore
+
+
+
 
 #exec --no-startup-id guake
 # Transparencia
@@ -276,20 +317,25 @@ exec --no-startup-id compton --config  ~/.config/i3/compton.conf
 #exec --no-startup-id xscreensaver -nosplash
 
 
-#exec --no-startup-id xautolock -time 10 -locker light-lock
+exec --no-startup-id light-locker
 
 #bluetooth
+# exec --no-startup-id blueberry-tray
 
-exec --no-startup-id blueberry-tray
+
 # fcitx
 exec --no-startup-id fcitx
 
 # clipboard
-exec --no-startup-id clipit
+exec --no-startup-id xfce4-clipman
 
 exec --no-startup-id sleep 3 && xfce4-power-manager
 
-exec --no-startup-id srunctl
+
+#wechat
+exec --nostartup-id electronic-wechat
+
+# exec --no-startup-id srunctl
 # Teclado numerico
 # exec --no-startup-id numlockx on
 

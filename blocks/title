@@ -1,0 +1,6 @@
+#!/bin/bash
+
+TITLE=$(xdotool getactivewindow getwindowname)
+
+echo "${TITLE}"
+echo "${TITLE}"

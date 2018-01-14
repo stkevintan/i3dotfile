@@ -6,19 +6,24 @@ i3blocks:
   bluetooth:
     - bluez
   brightness:
-    - xorg-xbacklight
+    - light
   cpu_usage:
     - sysstat
   battery:
     - acpi
+  playerctl:
+    - playerctl
+  window:
+    - xdotool
+  
 i3:
   - i3blocks
   - compton
   - dmenu
   - i3-quickswitch
-  - rofi
-  - xfce4-appfinder
-  - nitrogen
+  - xfce4-appfinder (appmenu)
+  - nitrogen (wallpaper)
+  - notify-osd (system notification)
   - lxappearance-gtk3
   - arandr
 
@@ -28,7 +33,7 @@ DM:
   - light-locker
  
 clipboard:
-  - clipit
+  - xfce4-clipman
 
 
 find WM: xprop|grep WM_CLASS
