@@ -2,7 +2,7 @@
 # export LC_TIME='en_US.UTF-8' 
 
 if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
-    notify-send "当前时间" "$(date '+%Y年%m月%d日 %A %H:%M:%S')" --icon=dialog-information 
+    notify-send "当前时间" "$(date '+%Y年%m月%d日 %A %H:%M:%S')" --icon=date
 fi
  
 FORMAT="${BLOCK_INSTANCE:-%H:%M}"

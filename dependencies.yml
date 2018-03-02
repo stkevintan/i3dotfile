@@ -1,12 +1,14 @@
 i3blocks:
   wifi:
-    - nmcli(NetworkManager)
+    - NetworkManager (nmcli, nmtui)
   temperature:
     - sensors
   bluetooth:
     - bluez
+    - blueberry
   brightness:
     - light
+    - bc
   cpu_usage:
     - sysstat
   battery:
@@ -20,10 +22,10 @@ i3:
   - i3blocks
   - compton
   - dmenu
-  - i3-quickswitch
+  - quickswitch-i3
   - xfce4-appfinder (appmenu)
   - nitrogen (wallpaper)
-  - notify-osd (system notification)
+  - xfce4-notifyd (system notification)
   - lxappearance-gtk3
   - arandr
 
@@ -33,7 +35,29 @@ DM:
   - light-locker
  
 clipboard:
-  - xfce4-clipman
+  - xfce4-clipman-plugin
+
+power saving:
+  - xfce4-power-manager
+
+other apps:
+  - deepin-screenshot
+  - nemo
+  - fcitx
+  - google-chrome
+  - telegram-desktop
+  - pantheon-terminal
+  - shotwell (image)
+  - vlc (video)
+  - netease-cloud-music (music)
+  - file-roller
+  - visual-studio-code
+
+fonts:
+  - Titillium
+  - fontawesome5
+  - Roboto mono
+  - wqy-microhei
 
 
 find WM: xprop|grep WM_CLASS
