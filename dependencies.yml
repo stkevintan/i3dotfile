@@ -17,6 +17,8 @@ i3blocks:
     - playerctl
   window:
     - xdotool
+  weather:
+    - wget
   
 i3:
   - i3blocks
