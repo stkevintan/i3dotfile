@@ -44,7 +44,7 @@ power saving:
 
 other apps:
   - deepin-screenshot
-  - nemo
+  - nemo[gvfs-smb(samba客户端),nemo-fileroller,nemo-image-converter,nemo-preview]
   - fcitx
   - google-chrome
   - telegram-desktop
@@ -60,6 +60,7 @@ fonts:
   - fontawesome5
   - Roboto mono
   - wqy-microhei
+  - Source Han Sans CN
 
 
 find WM: xprop|grep WM_CLASS

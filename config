@@ -86,8 +86,8 @@ bar {
   strip_workspace_numbers yes
 	colors {
 		background  #121417
-		#statusline #deded6
-		#separator  #4c5356
+		statusline #deded6
+		separator  #4c5356
 		focused_workspace #673AB7 #673AB7 #deded6
 		active_workspace #151515 #151515 #d7d0c7
 		inactive_workspace #2b3135 #2b3135 #deded6
@@ -111,7 +111,7 @@ for_window [class="Youdao Dict"] floating enable border normal
 for_window [class="Galculator"] floating enable border pixel 4
 for_window [class="File-roller"] floating enable border pixel 1
 for_window [class="KeeWeb"] floating enable border normal
-for_window [class="Telegram"] floating enable sticky enable
+for_window [class="Telegram"] floating enable sticky enable border normal
 for_window [class="(?i)xfce4-appfinder"] fullscreen enable
 for_window [class="dconf-editor"] floating enable border pixel 1
 for_window [class="netease-cloud-music"] floating enable sticky enable
@@ -125,7 +125,7 @@ for_window [class="(?i)pantheon-terminal"] floating enable
 bindsym $mod+d exec dmenu_run -l 5 -p Run: -fn "Titillium" -nb "$inactive-bg-color" -nf "$inactive-text-color" -sb "$inactive-text-color" -sf "$inactive-bg-color"
 bindsym $mod+shift+d exec i3-dmenu-desktop --dmenu='dmenu -l 5 -p Run: -fn "Titillium" -nb "$inactive-bg-color" -nf "$inactive-text-color" -sb "$inactive-text-color" -sf "$inactive-bg-color"'
 # bindsym $mod+c exec clipmenu  -fn "Titillium" -nb "$inactive-bg-color" -nf "$inactive-text-color" -sb "$inactive-text-color" -sf "$inactive-bg-color"
-bindsym $mod+Tab exec quickswitch.py -d 'dmenu -l 5 -p Windows: -fn "Titillium" -nb "$inactive-bg-color" -nf "$inactive-text-color" -sb "$inactive-text-color" -sf "$inactive-bg-color"'
+bindsym $mod+Tab exec quickswitch.py -d 'dmenu -l 10` -p Windows: -fn "Titillium" -nb "$inactive-bg-color" -nf "$inactive-text-color" -sb "$inactive-text-color" -sf "$inactive-bg-color"'
 
 #super + `
 bindsym $mod+F2 exec xfce4-appfinder
