@@ -1,0 +1,30 @@
+patch:
+  switcher/hotkeys:
+  - Alt+grave
+  switcher/caption: '-'
+  menu/page_size: 9
+  switcher/fold_options: false
+  schema_list:
+  - schema: double_pinyin_flypy
+  key_binder/bindings:
+  - send: Page_Up
+    accept: minus
+    when: has_menu
+  - send: Page_Down
+    accept: equal
+    when: has_menu
+  - send: Page_Up
+    accept: comma
+    when: paging
+  - send: Page_Down
+    accept: period
+    when: has_menu
+  - toggle: full_shape
+    accept: Shift+space
+    when: always
+  ascii_composer/switch_key:
+    Caps_Lock: noop
+    Shift_R: inline_ascii
+    Control_L: clear
+    Control_R: commit_text
+    Shift_L: commit_code

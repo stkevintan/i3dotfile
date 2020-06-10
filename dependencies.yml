@@ -21,11 +21,13 @@ i3blocks:
     - wget
   
 i3:
+  - i3-gaps
   - i3blocks
-  - compton
+  - picom
   - dmenu
   - quickswitch-i3
   - xfce4-appfinder (appmenu)
+  - xfce4-terminal
   - nitrogen (wallpaper)
   - xfce4-notifyd (system notification)
   - lxappearance-gtk3
@@ -44,23 +46,14 @@ power saving:
 
 other apps:
   - deepin-screenshot
-  - nemo[gvfs-smb(samba客户端),nemo-fileroller,nemo-image-converter,nemo-preview]
-  - fcitx
-  - google-chrome
-  - telegram-desktop
-  - pantheon-terminal
-  - shotwell (image)
-  - vlc (video)
-  - netease-cloud-music (music)
-  - file-roller
-  - visual-studio-code
+  - thunar (with thunar-volman, gvfs,thunar-media-tags-plugin ,thunar-archive-plugin, file-roller)
+  - fcitx (with fcitx-rime, fcitx-ui-light, fcitx-configtool)
 
 fonts:
   - Titillium
   - fontawesome5
-  - Roboto mono
+  - FiraCode Nerd Font
   - wqy-microhei
-  - Source Han Sans CN
 
 
 find WM: xprop|grep WM_CLASS
